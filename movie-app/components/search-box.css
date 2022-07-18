@@ -1,0 +1,68 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+/*
+ * The :host selector refers to the <search-box> element in the light DOM.
+ * These styles are defaults and can be overridden by the user of the
+ * <search-box> with styles in the light DOM.
+ */
+/* Note the parentheses: when host has hidden... */
+:host([hidden]) {
+  display: none; /* ...attribute set don't display it */
+}
+/* When host has the disabled attribute... */
+:host([disabled]) {
+  opacity: 0.6; /* ...gray it out */
+}
+/* When host has the focused attribute... */
+:host([focused]) {
+  box-shadow: 0 0 2px 2px #6ae; /* display this fake focus ring. */
+}
+
+/* The rest of the stylesheet only applies to elements in the Shadow DOM. */
+form#form {
+  display: flex;
+  position: relative;
+}
+
+button {
+  background: transparent;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:hover > i {
+  opacity: 1;
+}
+
+button > i {
+  color: #7378c5;
+  opacity: 0.75;
+  font-size: 1rem;
+}
+
+.input {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.input::placeholder {
+  color: #7378c5;
+}
+
+.input:focus {
+  outline: none;
+  background-color: var(--primary-color);
+}
