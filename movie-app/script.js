@@ -4,6 +4,7 @@ const API_URL =
 const IMG_PATH = "https://image.tmdb.org/t/p/w500"
 const SEARCH_URL =
   "https://api.themoviedb.org/3/search/movie?api_key=ea1dac810883ef884568d201b9b4d909&query="
+const API_KEY = "ea1dac810883ef884568d201b9b4d909"
 
 // UI Constants
 const main = document.getElementById("main")
@@ -21,12 +22,9 @@ searchBox.addEventListener("search", () => {
   else window.location.reload()
 })
 
-// Search Event Listener
-// form.onsubmit = (event) => {
-//   event.preventDefault()
-//   if (search.value && search.value !== "") getMovies(SEARCH_URL + search.value)
-//   else window.location.reload()
-// }
+searchBox.addEventListener("reset", () => {
+  if (event.detail === null) getMovies(API_URL)
+})
 
 async function getMovies(url) {
   const response = await fetch(url)
@@ -39,10 +37,11 @@ function showMovies(movies) {
   main.innerHTML = ""
 
   movies.forEach((movie) => {
-    const { title, poster_path, overview, vote_average } = movie
+    const { id, title, poster_path, overview, vote_average } = movie
 
     const movieEl = document.createElement("div")
     movieEl.classList.add("movie")
+    movieEl.setAttribute("id", id)
     movieEl.innerHTML = `<img src="${IMG_PATH + poster_path}" alt="${title}">
       <div class="movie-info">
         <h3>${title}</h3>
@@ -50,7 +49,7 @@ function showMovies(movies) {
       </div>
       <div class="overview">
         <h3>Overview</h3>
-        ${overview}
+        <p>${overview}</p>
       </div>`
 
     main.appendChild(movieEl)

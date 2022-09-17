@@ -20,6 +20,9 @@ class SearchBox extends HTMLElement {
     let searchSlot = this.shadowRoot.querySelector(
       "slot[name='magnifying-glass']"
     )
+    let resetSlot = this.shadowRoot.querySelector(
+      "slot[name='cross']"
+    )
 
     // If the user clicks on the magnifying glass, trigger a "search" event.
     // Also trigger it if the Enter key is pressed (because that PointerEvent.type property = click)
@@ -33,6 +36,22 @@ class SearchBox extends HTMLElement {
           detail: this.input.value,
         })
       )
+      this.input.blur()
+      if (this.input.value != "") resetSlot.style.display = "block"
+    }
+
+    resetSlot.onclick = (event) => {
+      event.preventDefault() // Prevent form submit
+      event.stopPropagation() // Prevent click events from bubbling
+      if (this.disabled) return // Do nothing when disabled
+      this.dispatchEvent(
+        new CustomEvent("reset", {
+          detail: null
+        })
+      )
+      this.input.value = ""
+      this.input.focus()
+      resetSlot.style.display = "none"
     }
   }
 
@@ -107,7 +126,7 @@ class SearchBox extends HTMLElement {
 SearchBox.observedAttributes = ["disabled", "placeholder", "size", "value"]
 
 // Create a <template> element to hold the stylesheet and the tree of
-// elements that we'll use fot each instance of the SearchBox element.
+// elements that we'll use for each instance of the SearchBox element.
 SearchBox.template = document.createElement("template")
 
 // We initialize the template by parsing this string of HTML. Note, however,
@@ -119,8 +138,12 @@ SearchBox.template.innerHTML = `
 </style>
 <form id="form">
   <input type="text" id="input" class="input" />
+  <slot style="display: none;" name="cross">
+    <button id="reset" type="reset" title="Clear"><i class="fas fa-times"></i></button>
+    <span class="separator"></span>
+  </slot>
   <slot name="magnifying-glass">
-    <button type="submit"><i class="fas fa-search"></i></button>
+    <button id="search" type="submit" title="Search"><i class="fas fa-search"></i></button>
   </slot>
 </form>`
 
