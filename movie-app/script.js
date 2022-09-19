@@ -58,6 +58,7 @@ function showMovies(movies) {
   movies.forEach((movie) => {
     let { id, title, poster_path, overview, vote_average } = movie
     poster_path = poster_path ? IMG_PATH_500 + poster_path : "images/placeholder-300x450.png"
+
     const movieEl = document.createElement("div")
     movieEl.classList.add("movie")
     movieEl.innerHTML = `<img src="${poster_path}" alt="${title}">
@@ -77,7 +78,8 @@ function showMovies(movies) {
 
 function showSingleMovie(movie) {
   singleMain.innerHTML = ""
-  const { title, backdrop_path, overview, vote_average } = movie
+  let { title, backdrop_path, overview, vote_average } = movie
+  backdrop_path = backdrop_path ? IMG_PATH_ORIGINAL + backdrop_path : "images/placeholder-1072x603.png"
 
   const movieEl = document.createElement("div")
   movieEl.classList.add("movie")
@@ -86,7 +88,7 @@ function showSingleMovie(movie) {
   <h1 class="movie-title">${title}</h1>
   <span class="${getClassByRate(vote_average)}">${Math.round(vote_average * 10) / 10}</span>
   </div>
-  <img src="${IMG_PATH_ORIGINAL + backdrop_path}" alt="${title}">
+  <img src="${backdrop_path}" alt="${title}">
   <p class="movie-description">${overview}</p>`
 
   singleMain.appendChild(movieEl)
