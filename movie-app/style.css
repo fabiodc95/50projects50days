@@ -16,10 +16,26 @@ body {
 }
 
 header {
-  padding: 1rem;
+  padding: 1rem 4rem;
   display: flex;
   justify-content: flex-end;
   background-color: var(--secondary-color);
+}
+
+.back-btn {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  transition: all ease 0.4s;
+}
+
+.back-btn:hover {
+  transform: translateX(-10px);
 }
 
 main {
@@ -56,23 +72,49 @@ main {
   margin: 0;
 }
 
-.movie-info span {
+.movie-info span,
+.movie-head span {
   background-color: var(--primary-color);
   padding: 0.25rem 0.5rem;
   border-radius: 5px;
   font-weight: bold;
 }
 
-.movie-info span.green {
+.movie-info span.green,
+.movie-head span.green {
   color: lightgreen;
 }
 
-.movie-info span.orange {
+.movie-info span.orange, 
+.movie-head span.orange{
   color: orange;
 }
 
-.movie-info span.red {
+.movie-info span.red,
+.movie-head span.red {
   color: red;
+}
+
+#single-movie-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#single-movie-container .movie {
+  width: 100%;
+  padding: 40px;
+  margin: 30px auto;
+  color: #fff;
+}
+
+.movie-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1.movie-title {
+  margin-top: 0;
 }
 
 .overview {
@@ -94,4 +136,12 @@ main {
 
 .overview h3 {
   margin-top: 0;
+}
+
+.overview a {
+  text-decoration: none;
+}
+
+.overview a:hover {
+  text-decoration: underline;
 }
