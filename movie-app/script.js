@@ -51,6 +51,7 @@ async function getSingleMovie() {
   const response = await fetch(SINGLE_MOVIE_URL + movie_id + "?api_key=" + API_KEY)
   const data = await response.json()
   // Show data in the UI
+  // console.log(data)
   showSingleMovie(data)
 }
 
@@ -80,18 +81,27 @@ function showMovies(movies) {
 
 function showSingleMovie(movie) {
   singleMain.innerHTML = ""
-  let { title, backdrop_path, overview, vote_average } = movie
+  let { title, backdrop_path, genres, overview, production_companies, release_date, vote_average } = movie
+  const genresString = genres.map((genre) => genre.name).join(", ")
+  const prodCompString = production_companies.map((company) => company.name).join(", ")
+  release_date = new Date(release_date).toDateString()
   backdrop_path = backdrop_path ? IMG_PATH_ORIGINAL + backdrop_path : "images/placeholder-1072x603.png"
 
   const movieEl = document.createElement("div")
   movieEl.classList.add("movie")
   movieEl.innerHTML = `
   <div class="movie-head">
-  <h1 class="movie-title">${title}</h1>
-  <span class="${getClassByRate(vote_average)}">${Math.round(vote_average * 10) / 10}</span>
+    <h1 class="movie-title">${title}</h1>
+    <span class="${getClassByRate(vote_average)}">${Math.round(vote_average * 10) / 10}</span>
   </div>
   <img src="${backdrop_path}" alt="${title}">
-  <p class="movie-description">${overview}</p>`
+  <div class="movie-details">
+    <p><strong>Release Date:</strong>&nbsp;${release_date}</p>
+    <p><strong>Genres:</strong>&nbsp;${genresString}</p>
+    <p><strong>Production Companies:</strong>&nbsp;${prodCompString}</p>
+    <h4>Overview:</h4>
+    <p class="movie-description">${overview}</p>
+  </div>`
 
   singleMain.appendChild(movieEl)
 }

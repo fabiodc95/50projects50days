@@ -113,6 +113,14 @@ main {
   justify-content: space-between;
 }
 
+.movie-details p {
+  font-weight: 300;
+}
+
+.movie-description {
+  margin-top: -10px;
+}
+
 h1.movie-title {
   margin-top: 0;
 }
