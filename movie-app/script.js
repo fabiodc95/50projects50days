@@ -16,9 +16,11 @@ const searchBox = document.querySelector("search-box")
 // const search = document.getElementById("search")
 
 // Start the App
-// console.log(window.location)
-if (window.location.pathname === "/index.html") getMovies(API_URL)
-else if (window.location.pathname === "/movie.html") getSingleMovie()
+var path = window.location.pathname
+var page = path.split("/").pop()
+
+if (page === "index.html" || page === "") getMovies(API_URL)
+else getSingleMovie()
 
 // Custom Version using Web Component
 if (searchBox) {
