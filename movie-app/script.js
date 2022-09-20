@@ -72,7 +72,7 @@ function showMovies(movies) {
       <div class="overview">
         <h3>Overview</h3>
         <p>${overview}</p>
-        <a href="movie.html?movie_id=${id}">Show detail</a>
+        <a class="info-btn" href="movie.html?movie_id=${id}"><i class="fas fa-info"></i>More info</a>
       </div>`
 
     main.appendChild(movieEl)

@@ -22,6 +22,26 @@ header {
   background-color: var(--secondary-color);
 }
 
+.info-btn {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  border: none;
+  transition: all ease 0.3s;
+}
+
+.info-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.info-btn i { margin-right: 5px; }
+
 .back-btn {
   cursor: pointer;
   background-color: var(--primary-color);
@@ -144,12 +164,4 @@ h1.movie-title {
 
 .overview h3 {
   margin-top: 0;
-}
-
-.overview a {
-  text-decoration: none;
-}
-
-.overview a:hover {
-  text-decoration: underline;
 }
