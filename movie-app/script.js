@@ -58,25 +58,34 @@ async function getSingleMovie() {
 function showMovies(movies) {
   main.innerHTML = ""
 
-  movies.forEach((movie) => {
-    let { id, title, poster_path, overview, vote_average } = movie
-    poster_path = poster_path ? IMG_PATH_500 + poster_path : "images/placeholder-300x450.png"
+  if (movies.length !== 0) {
+    movies.forEach((movie) => {
+      let { id, title, poster_path, overview, vote_average } = movie
+      poster_path = poster_path ? IMG_PATH_500 + poster_path : "images/placeholder-300x450.png"
 
-    const movieEl = document.createElement("div")
-    movieEl.classList.add("movie")
-    movieEl.innerHTML = `<img src="${poster_path}" alt="${title}">
-      <div class="movie-info">
-        <h3>${title}</h3>
-        <span class="${getClassByRate(vote_average)}">${Math.round(vote_average * 10) / 10}</span>
-      </div>
-      <div class="overview">
-        <h3>Overview</h3>
-        <p>${overview}</p>
-        <a class="info-btn" href="movie.html?movie_id=${id}"><i class="fas fa-info"></i>More info</a>
-      </div>`
+      const movieEl = document.createElement("div")
+      movieEl.classList.add("movie")
+      movieEl.innerHTML = `<img src="${poster_path}" alt="${title}">
+        <div class="movie-info">
+          <h3>${title}</h3>
+          <span class="${getClassByRate(vote_average)}">${Math.round(vote_average * 10) / 10}</span>
+        </div>
+        <div class="overview">
+          <h3>Overview</h3>
+          <p>${overview}</p>
+          <a class="info-btn" href="movie.html?movie_id=${id}"><i class="fas fa-info"></i>More info</a>
+        </div>`
 
-    main.appendChild(movieEl)
-  })
+      main.appendChild(movieEl)
+    })
+  } else {
+    const message = document.createElement("div")
+    message.classList.add("nf-message")
+    message.innerHTML = `
+    <i class="fas fa-frown fa-3x"></i>
+    <p>Sorry, your search yielded no results.</p>`
+    main.appendChild(message)
+  }
 }
 
 function showSingleMovie(movie) {
